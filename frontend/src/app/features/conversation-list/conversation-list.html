@@ -1,0 +1,72 @@
+<section class="panel">
+  <header class="filters">
+    <input
+      type="search"
+      placeholder="Search name, email or subject"
+      [value]="search"
+      (input)="onSearchInput($any($event.target).value)"
+      aria-label="Search conversations"
+    />
+
+    <select
+      [(ngModel)]="status"
+      (ngModelChange)="onFilterChange()"
+      aria-label="Filter by status"
+    >
+      <option value="">All statuses</option>
+      @for (s of statuses; track s) {
+        <option [value]="s">{{ s }}</option>
+      }
+    </select>
+
+    <select
+      [(ngModel)]="priority"
+      (ngModelChange)="onFilterChange()"
+      aria-label="Filter by priority"
+    >
+      <option value="">All priorities</option>
+      @for (p of priorities; track p) {
+        <option [value]="p">{{ p }}</option>
+      }
+    </select>
+  </header>
+
+  @if (loading()) {
+    <p class="state">Loading conversations…</p>
+  } @else if (error()) {
+    <p class="state state--error">
+      {{ error() }}
+      <button type="button" (click)="reload()">Retry</button>
+    </p>
+  } @else if (conversations().length === 0) {
+    <p class="state">No conversations match your filters.</p>
+  } @else {
+    <table>
+      <thead>
+        <tr>
+          <th>Customer</th>
+          <th>Subject</th>
+          <th>Status</th>
+          <th>Priority</th>
+          <th>Created</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (c of conversations(); track c.id) {
+          <tr
+            [class.row--selected]="c.id === selectedId()"
+            (click)="select(c.id)"
+            (keydown.enter)="select(c.id)"
+            tabindex="0"
+          >
+            <td>{{ c.customerName }}</td>
+            <td>{{ c.subject }}</td>
+            <td><span class="badge" [attr.data-value]="c.status">{{ c.status }}</span></td>
+            <td><span class="badge" [attr.data-value]="c.priority">{{ c.priority }}</span></td>
+            <td class="muted">{{ c.createdAt | date: 'mediumDate' }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</section>

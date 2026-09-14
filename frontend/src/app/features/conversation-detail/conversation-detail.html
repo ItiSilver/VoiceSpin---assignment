@@ -1,0 +1,41 @@
+@if (conversation(); as c) {
+  <section class="panel">
+    <h2>{{ c.subject }}</h2>
+
+    <div class="badges">
+      <span class="badge" [attr.data-value]="c.status">{{ c.status }}</span>
+      <span class="badge" [attr.data-value]="c.priority">{{ c.priority }}</span>
+    </div>
+
+    <dl>
+      <dt>Customer</dt>
+      <dd>{{ c.customerName }}</dd>
+      <dt>Email</dt>
+      <dd>{{ c.customerEmail }}</dd>
+      <dt>Created</dt>
+      <dd>{{ c.createdAt | date: 'medium' }}</dd>
+    </dl>
+
+    <label>
+      Change status
+      <select [ngModel]="c.status" (ngModelChange)="changeStatus($event)">
+        @for (s of statuses; track s) {
+          <option [value]="s">{{ s }}</option>
+        }
+      </select>
+    </label>
+
+    <label>
+      Change priority
+      <select [ngModel]="c.priority" (ngModelChange)="changePriority($event)">
+        @for (p of priorities; track p) {
+          <option [value]="p">{{ p }}</option>
+        }
+      </select>
+    </label>
+  </section>
+} @else {
+  <section class="panel panel--empty">
+    <p>Select a conversation to see its details.</p>
+  </section>
+}

@@ -1,0 +1,75 @@
+.panel {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 1.5rem;
+}
+
+.panel--empty {
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 10rem;
+  text-align: center;
+}
+
+h2 {
+  margin: 0 0 0.6rem;
+  font-size: 1.05rem;
+  font-weight: 650;
+  line-height: 1.35;
+}
+
+.badges {
+  display: flex;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.4rem 1rem;
+  margin: 0 0 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.88rem;
+}
+
+dt {
+  color: var(--text-muted);
+}
+
+dd {
+  margin: 0;
+  word-break: break-word;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.85rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+label select {
+  display: block;
+  margin-top: 0.3rem;
+  padding: 0.45rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font: inherit;
+  color: var(--text);
+  background: var(--surface);
+  min-width: 12rem;
+}
+
+label select:focus {
+  outline: 2px solid var(--accent-soft);
+  border-color: var(--accent);
+}

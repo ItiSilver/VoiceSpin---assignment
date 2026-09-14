@@ -1,0 +1,16 @@
+# Go build output
+backend/server
+backend/*.exe
+*.test
+*.out
+
+# Node / Angular
+node_modules/
+dist/
+.angular/
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
+.claude/
